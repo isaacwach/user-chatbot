@@ -18,3 +18,13 @@ def get_answer_for_question(question: str, knowledge_base: dict) -> str | None:
     for q in knowledge_base["questions"]:
         if q["question"] == question:
             return q["answer"]
+        
+def chat_bot():
+    knowledge_base: dict = load_knowledge_base("knowledge_base.json")
+
+    while True:
+        user_input: str = input('You: ')
+
+        if user_input.lower() == 'quit':
+            break
+        best_match: str | None = find_best_match(user_input, [q["question"] for q in knowledge_base["questions"]])
